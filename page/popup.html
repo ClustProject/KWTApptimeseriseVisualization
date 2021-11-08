@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title>Marker Cluster 테스트</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/map_common.css"/>
+	<link rel="stylesheet" href="../static/css/marker_cluster.css"/>
+
+    <link rel="stylesheet" href="../static/css/common.css"/>
+    <link rel="stylesheet" href="../static/css/style.css"/>
+
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
+
+    <!--dataTable-->
+<link rel="stylesheet" href="../static/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- amchart -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/lang/de_DE.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/germanyLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/fonts/notosans-sc.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+	
+	<script src="../static/js/popup.js"></script>
+    <style>
+        .table td, .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        .table thead th {
+            vertical-align: bottom;
+        }
+     
+        
+        button span{
+            color: #fff;
+        }
+        
+        .modal-title{
+            font-size: 25px;
+        }
+        div.dataTables_length select{
+            appearance: auto;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding:0;
+        }
+
+
+        div.ui-datepicker-header a{
+            text-decoration:none;
+            text-align:center;
+            vertical-align: middle;
+            font-size:1.2em;
+        }
+        </style>
+
+   
+</head>
+<body>
+    <div class="content-wrapper" style="margin-left:0px !important;">
+        <section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2" >
+					<strong><span  style="font-size: 25px;"></span> <span style="font-size: 25px;"> 상세정보</span></strong>
+				</div>
+			</div>
+		</section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                <div class="card">
+                        <form role="form">
+                            <div class="card-body">
+                                <input type="hidden" id="p_h_serialNum"/>
+                                <input type="hidden" id="p_h_parentSpaceName"/>
+                                <input type="hidden" id="p_h_spaceName"/>
+                                <input type="hidden" id="p_h_productDt"/>
+                                <input type="hidden" id="p_h_stationName"/> 
+                                <div class="row" style="border-top:3px solid #aaa; height:35px; line-height:35px; width:50%">
+                                    <div style="background-color:#e6edf9; border-bottom:1px solid #aaa; width:30%; text-align:center; font-weight: bold ;">지점명</div>
+                                    <div id="txtStationName" style="border-bottom:1px solid #aaa;width:70%; font-weight: bold ;"></div>
+                                </div>
+
+
+                                <div id="topUlDiv">
+                                    <ul>
+                                        <li id="location">현재위치</li>
+                                        <li id="locDetail">반경 1km</li>
+                                        <li id="iaqoaq">실내</li>
+                                        <li id="category">어린이집</li>
+                                    </ul>
+                                </div> 
+                             
+
+                                <div class="row" style="height:35px; line-height:35px;margin-top: 4px;width:50%">
+                                    <div  style="border-bottom:3px solid #aaa; background-color:#e6edf9;width:30%; text-align:center; font-weight: bold ;">지점번호</div>
+                                    <div  id="txtSerial" style="border-bottom:3px solid #aaa;width:70%; font-weight: bold ;"></div>
+                               
+                                </div>
+
+                                
+
+                                
+                                <div class="form-group mt20" style="margin-top: 0px;">
+              
+                                    <br>
+                                    <select id="searchOption" class="form-control d-inline-block" style="width:100px; vertical-align: middle;appearance: auto;">
+                                        <option value="sum">전체</option>
+                                        <option value="5m-avg-none">5분 평균</option>
+                                        <option value="1h-avg-none">1시간 평균</option>
+                                    </select>
+                                    <input type="text" class="form-control d-inline-block" name="startDt" id="startDt" placeholder="시작일자 클릭 후 선택" style="width:150px; vertical-align: middle;"> ~ 
+                                    <input type="text" class="form-control d-inline-block mr10" name="endDt" id="endDt" placeholder="종료일자 클릭 후 선택" style="width:150px; vertical-align: middle;">
+                                    <input type="button" class="btn btn-primary ml3 mr10" style="min-width:100px;" id="modalSearchBtn" value="검 색">
+                                        
+             
+                                    <div id="chartTypes" style="display: inline-block; vertical-align: middle;">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mt10" id="timeChartDiv" style="height: 500px;"></div>
+                                <div class="form-group mt10">
+                                     <h5 style="display:inline-block;margin-bottom: 0.25rem; vertical-align: middle; float:left" id="tableTitle">검색 결과</h5>
+                                    
+                                     <table id="popTable" class="table table-bordered table-hover text-center" style="margin-top: 0px !important;">
+                                         <thead>
+                                             <tr id="popTableHead">
+                                             </tr>
+                                         </thead>
+                                         <tbody>
+                                            <tr id="popTableBody">
+                                            </tr>
+                                        </tbody>
+                                     </table>
+                                </div>
+                                
+                            </div>
+                   
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </section>
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>

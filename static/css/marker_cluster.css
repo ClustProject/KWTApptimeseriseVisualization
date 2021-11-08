@@ -1,0 +1,32 @@
+.map-on-top-right-field {
+  z-index: 500;
+  position: absolute;
+  top: 22px;
+  right: 130px;
+}
+
+.map-on-top-left-field {
+  width: 500px;
+  z-index: 500;
+  position: absolute;
+  top: 30px;
+  left: 50px;
+}
+
+.map-ctn-btn {
+  border-radius: 50px;
+  padding: 10px;
+  cursor: pointer;
+  color: black;
+  background: white;
+}
+
+.map-txt {
+  width: 480px;
+  border-radius: 50px;
+  padding: 10px;
+  padding-left: 25px;
+  cursor: pointer;
+  color: black;
+  background: white;
+}

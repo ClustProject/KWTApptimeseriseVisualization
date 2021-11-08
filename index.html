@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<title>Marker Cluster 테스트</title>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="../static/asset/leaflet.markercluster-src.js"></script>
+    <link rel="stylesheet" href="../static/css/map_common.css"/>
+	<link rel="stylesheet" href="../static/css/marker_cluster.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/MarkerCluster.Default.min.css" />
+	
+
+      <!--dataTable-->
+<link rel="stylesheet" href="../static/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+   
+</head>
+<style>
+   .leaflet-popup-content-wrapper{
+        width:440px;
+    
+    }
+
+    .marker-cluster-small div {
+    background-color: rgb(222 176 186);
+}
+
+.marker-cluster-small {
+    background-color: rgb(226 140 140 / 60%);
+}
+.marker-cluster div {
+    font: 20px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+div.dataTables_wrapper div.dataTables_length select {
+    width:50px;
+    font-size: 0.8em;
+}
+
+div.dataTables_info{
+    margin-right:15px;
+    margin-bottom : 10px;
+    font-weight:bold;
+    font-size:0.9em;
+    padding-top:6px;
+    
+}
+</style>
+
+<body>
+    <div id="map"></div>
+	<!-- <div class="map-on-top-right-field">
+		<span class="map-ctn-btn" id="moveBtn">
+			<strong>랜덤 이동 버튼</strong>
+		</span>
+	</div> -->
+	<div class="map-on-top-left-field">
+		<div class="map-txt">
+			<strong id="myLocationTxt"></strong>
+            <select id="locationSelectBox">
+                <option value="here">현재 위치에서 검색</option>
+                <option value="spot">원하는 위치에서 검색</option>
+            </select>
+			<select id="distanceSelectBox" onchange="changeCircle()">
+                <option value="" hidden>반 경</option>
+				<option value="all">전 체</option>
+				<option value="1000">1 km</option>
+				<option value="5000">5 km</option>
+                <option value="" hidden>반경고정</option>
+			</select>
+            <select id="iaqoaqSelectBox" >
+                <option value="" hidden>공기질</option>
+                <option value="iaq">실내</option>
+                <option value="oaq">실외</option>
+            </select>
+            <select id="categorySelect" >
+                <option value="" hidden>시설/지역</option>
+            </select>
+            <button id='search'>조회</button>
+            <br>
+            <div id="spotDiv" style='display:none'>
+            <select id="siSelectBox" >
+                <option value="" hidden>시</option>
+            </select>
+            <select id="guSelectBox" >
+                <option value="" hidden>구</option>
+            </select>
+            <select id="dongSelectBox" >
+                <option value="" hidden>동</option>
+            </select>
+        </div>
+
+		</div>
+	</div>
+
+    <div id="listDiv">
+       
+        <button id="csvDownBtn">측정망 리스트 다운로드</button>
+   
+        <table id="listTable">
+            <thead>
+                <td>지점명</td>
+                <td>지점번호</td>
+                <td>위도</td>
+                <td>경도</td>
+            </thead>
+            <tbody id="listTableBody">
+
+            </tbody>
+        </table>
+  
+        
+    </div>
+    <!-- <button id="csvDownBtn">측정망 리스트 다운로드</button> -->
+    <script src="../static/js/search.js"></script>
+    <script src="../static/js/cluster.js"></script>
+    
+
+</body>
+</html>
