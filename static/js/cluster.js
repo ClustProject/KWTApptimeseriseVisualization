@@ -35,7 +35,7 @@ var googleCanvas = L.tileLayer(
 );
 
 var iaqIcon = L.icon({
-  iconUrl: "../static/image/marker-blue.png",
+  iconUrl: "../static/image/marker-red.png",
   popupAnchor: [10, -7],
 });
 
