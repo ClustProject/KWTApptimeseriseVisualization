@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -103,6 +104,11 @@ div.dataTables_info{
 
 		</div>
 	</div>
+    <div class="map-on-top-right-field">
+        <button class="right-pm-btn" onclick="openPmPop('pm10')">PM-10</button>
+        <button class="right-pm-btn" onclick="openPmPop('pm25')">PM-2.5</button>
+
+    </div>
 
     <div id="listDiv">
        
@@ -114,6 +120,8 @@ div.dataTables_info{
                 <td>지점번호</td>
                 <td>위도</td>
                 <td>경도</td>
+                <td>수신현황</td>
+
             </thead>
             <tbody id="listTableBody">
 
@@ -123,8 +131,11 @@ div.dataTables_info{
         
     </div>
     <!-- <button id="csvDownBtn">측정망 리스트 다운로드</button> -->
+    <div class="map-on-bottom-left-field" id="marker-legend" style="display: none;"><img src="static/image/marker-legend.svg" style="width: 100%;"></div>
+
     <script src="../static/js/search.js"></script>
     <script src="../static/js/cluster.js"></script>
+
     
 
 </body>
